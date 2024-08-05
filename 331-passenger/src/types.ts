@@ -1,4 +1,5 @@
 export interface Passenger{
+    id: number
     name: string
     age: number
     passport_number: string

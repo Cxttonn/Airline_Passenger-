@@ -12,11 +12,11 @@ const {passenger} = toRefs(props)
 const router = useRouter()
 const store = useMessageStore()
 const register = () => {
-    store.updateMessage('You are successfully registered for' + props.passenger.title)
+    store.updateMessage('You are successfully registered for ' + props.passenger.name)
     setTimeout(() => {
         store.resetMessage()
-    }, 3000)
-    router.push({name: 'event-detail-view', params: {id: props.passenger.id}})
+    }, 5000)
+    router.push({name: 'passenger-detail-view', params: {id: props.passenger.id}})
 }
 </script>
 <template>

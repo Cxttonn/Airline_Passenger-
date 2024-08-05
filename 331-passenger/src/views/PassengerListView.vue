@@ -6,17 +6,17 @@ import PassengerService from '@/services/PassengerService';
 import { useRoute, useRouter } from 'vue-router';
 import nProgress from 'nprogress'
 
-// Initialize route and router
+
 const route = useRoute();
 const router = useRouter();
 
-// Define state variables
+
 const passengers = ref<Passenger[] | null>(null);
 const totalPassengers = ref(0);
-const pageSize = ref(parseInt(route.query.pageSize as string) || 2); // Default to 2 if not provided
+const pageSize = ref(parseInt(route.query.pageSize as string) || 2); 
 const page = ref(parseInt(route.query.page as string) || 1);
 
-// Compute whether there is a next page
+
 const hasNextPage = computed(() => {
   const totalPages = Math.ceil(totalPassengers.value / pageSize.value);
 //   const totalPages = Math.ceil(totalPassengers.value / 3);
@@ -32,8 +32,8 @@ const props = defineProps({
   
   onMounted(() => {
     watchEffect(() => {
-      // events.value = null
-      // nProgress.start()
+      passengers.value = null
+      nProgress.start()
       PassengerService.getPassengers(pageSize, page.value)
         .then((response) => {
           passengers.value = response.data
@@ -42,13 +42,13 @@ const props = defineProps({
         .catch((error) => {
           console.error('There was an error!', error)
         })
-        // .finally(() => {
-        //   nProgress.done()
-        // })
+        .finally(() => {
+          nProgress.done()
+        })
     })
   })
 
-// Fetch events based on the current page size and page number
+
 const fetchPassengers = async () => {
   try {
     const response = await PassengerService.getPassengers(pageSize.value, page.value);
@@ -59,7 +59,7 @@ const fetchPassengers = async () => {
   }
 };
 
-// Watch route query parameters and update page size and page number
+
 watch(
   [() => route.query.pageSize, () => route.query.page],
   ([newPageSize, newPage]) => {
@@ -69,15 +69,14 @@ watch(
   }
 );
 
-// Fetch events on component mount
+
 onMounted(fetchPassengers);
 </script>
 
 <template>
   <h1>Passengers</h1>
   <div class="passenger">
-    <PassengerCard v-for="passenger in passengers" :key="passenger.passport_number" :passenger="passenger" />
-    <!-- <EventSummary v-for="passenger in passengers" :key="event.id" :event="event" /> -->
+    <PassengerCard v-for="passenger in passengers" :key="passenger.id" :passenger="passenger" />
   </div>
   <div class="pagination">
     <RouterLink
@@ -108,8 +107,8 @@ onMounted(fetchPassengers);
 
 .pagination {
   display: flex;
-  justify-content: center; /* Center the pagination buttons */
-  gap: 100px; /* Add some space between the buttons */
+  justify-content: center;
+  gap: 100px;
   margin-top: 20px;
 }
 

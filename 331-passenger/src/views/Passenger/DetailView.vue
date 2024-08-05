@@ -9,6 +9,7 @@ const props = defineProps<{
 const {passenger} = toRefs(props)
 </script>
 <template>
+    <p>Passport Number: {{ passenger.passport_number }}</p>
     <p>{{ passenger.departure_time }} on {{ passenger.departure_date }} @ {{ passenger.destination }}</p>
-    <p>{{ passenger.flight }}</p>
+    <p>Flight: {{ passenger.flight }}    Seat Number: {{ passenger.seat_number }}</p>
 </template>
