@@ -12,7 +12,7 @@ const route = useRoute();
 const pageSize = ref(parseInt(route.query.pageSize as string) || 10);
 
 const updatePageSize = () => {
-  router.push({ name: 'event-list-view', query: { ...route.query, pageSize: pageSize.value, page: 1 } });
+  router.push({ name: 'passenger-list-view', query: { ...route.query, pageSize: pageSize.value, page: 1 } });
 };
 
 watch(
@@ -31,11 +31,11 @@ watch(
       </div>
       <div class="wrapper">
         <nav>
-          <RouterLink :to="{ name: 'event-list-view' }">Event</RouterLink> |
+          <RouterLink :to="{ name: 'passenger-list-view' }">Passenger</RouterLink> |
           <RouterLink :to="{ name: 'about' }">About</RouterLink>
         </nav>
         <div class="pagination-controls">
-          <label for="pageSize">Events per page:</label>
+          <label for="pageSize">Passengers per page:</label>
           <select id="pageSize" v-model="pageSize" @change="updatePageSize">
             <option value="2">2</option>
             <option value="4">4</option>

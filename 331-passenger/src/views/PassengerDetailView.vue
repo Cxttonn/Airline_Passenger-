@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {ref, onMounted, defineProps} from 'vue'
-import { type Event } from '@/types';
-import EventService from '@/services/EventService'
-const event = ref<Event | null>(null)
+import { type Passenger } from '@/types';
+import PassengerService from '@/services/PassengerService'
+const passenger = ref<Passenger | null>(null)
 const props = defineProps({
     id: {
         type: String,
@@ -10,9 +10,9 @@ const props = defineProps({
     }
 })
 onMounted(() => {
-    EventService.getEvent(parseInt(props.id))
+    PassengerService.getPassenger(parseInt(props.id))
     .then((response) => {
-        event.value = response.data
+        passenger.value = response.data
     })
     .catch((error) => {
         console.error('There was an error!' , error)
@@ -20,9 +20,9 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div v-if="event">
-        <h1>{{ event.title }}</h1>
-        <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-        <p>{{ event.description }}</p>
+    <div v-if="passenger">
+        <h1>{{ passenger.name }}</h1>
+        <p>{{ passenger.departure_time }} on {{ passenger.departure_date }} @ {{ passenger.destination}}</p>
+        <p>{{ passenger.flight }}</p>
     </div>
 </template>

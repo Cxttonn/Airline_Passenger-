@@ -1,11 +1,10 @@
 export interface Passenger{
-    id: number
-    category: string
-    title: string
-    description: string
-    location: string
-    date: string
-    time: string
-    petsAllowed: boolean
-    organizer: string
+    name: string
+    age: number
+    passport_number: string
+    flight: string
+    seat_number: string
+    destination: string
+    departure_date: string
+    departure_time: string
 }

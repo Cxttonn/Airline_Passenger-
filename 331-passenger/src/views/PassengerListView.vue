@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import EventCard from '@/components/EventCard.vue';
-import EventSummary from '@/components/EventSummary.vue';
-import { type Event } from '@/types';
+import PassengerCard from '@/components/PassengerCard.vue';
+import { type Passenger } from '@/types';
 import { ref, computed, watch, onMounted,watchEffect } from 'vue';
-import EventService from '@/services/EventService';
+import PassengerService from '@/services/PassengerService';
 import { useRoute, useRouter } from 'vue-router';
 import nProgress from 'nprogress'
 
@@ -12,15 +11,15 @@ const route = useRoute();
 const router = useRouter();
 
 // Define state variables
-const events = ref<Event[] | null>(null);
-const totalEvents = ref(0);
+const passengers = ref<Passenger[] | null>(null);
+const totalPassengers = ref(0);
 const pageSize = ref(parseInt(route.query.pageSize as string) || 2); // Default to 2 if not provided
 const page = ref(parseInt(route.query.page as string) || 1);
 
 // Compute whether there is a next page
 const hasNextPage = computed(() => {
-  // const totalPages = Math.ceil(totalEvents.value / pageSize.value);
-  const totalPages = Math.ceil(totalEvents.value / 3);
+  const totalPages = Math.ceil(totalPassengers.value / pageSize.value);
+//   const totalPages = Math.ceil(totalPassengers.value / 3);
   return page.value < totalPages;
 });
 
@@ -35,10 +34,10 @@ const props = defineProps({
     watchEffect(() => {
       // events.value = null
       // nProgress.start()
-      EventService.getEvents(3, page.value)
+      PassengerService.getPassengers(pageSize, page.value)
         .then((response) => {
-          events.value = response.data
-          totalEvents.value = response.headers['x-total-count']
+          passengers.value = response.data
+          totalPassengers.value = response.headers['x-total-count']
         })
         .catch((error) => {
           console.error('There was an error!', error)
@@ -50,11 +49,11 @@ const props = defineProps({
   })
 
 // Fetch events based on the current page size and page number
-const fetchEvents = async () => {
+const fetchPassengers = async () => {
   try {
-    const response = await EventService.getEvents(pageSize.value, page.value);
-    events.value = response.data;
-    totalEvents.value = parseInt(response.headers['x-total-count']);
+    const response = await PassengerService.getPassengers(pageSize.value, page.value);
+    passengers.value = response.data;
+    totalPassengers.value = parseInt(response.headers['x-total-count']);
   } catch (error) {
     console.error('Failed to fetch events:', error);
   }
@@ -66,24 +65,24 @@ watch(
   ([newPageSize, newPage]) => {
     pageSize.value = parseInt(newPageSize as string) || 2;
     page.value = parseInt(newPage as string) || 1;
-    fetchEvents();
+    fetchPassengers();
   }
 );
 
 // Fetch events on component mount
-onMounted(fetchEvents);
+onMounted(fetchPassengers);
 </script>
 
 <template>
-  <h1>Events For Good</h1>
-  <div class="event">
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
-    <EventSummary v-for="event in events" :key="event.id" :event="event" />
+  <h1>Passengers</h1>
+  <div class="passenger">
+    <PassengerCard v-for="passenger in passengers" :key="passenger.passport_number" :passenger="passenger" />
+    <!-- <EventSummary v-for="passenger in passengers" :key="event.id" :event="event" /> -->
   </div>
   <div class="pagination">
     <RouterLink
       id="page-prev"
-      :to="{ name: 'event-list-view', query: { pageSize: pageSize, page: page - 1 } }"
+      :to="{ name: 'passenger-list-view', query: { pageSize: pageSize, page: page - 1 } }"
       rel="prev"
       v-if="page > 1"
     >
@@ -91,7 +90,7 @@ onMounted(fetchEvents);
     </RouterLink>
     <RouterLink
       id="page-next"
-      :to="{ name: 'event-list-view', query: { pageSize: pageSize, page: page + 1 } }"
+      :to="{ name: 'passenger-list-view', query: { pageSize: pageSize, page: page + 1 } }"
       rel="next"
       v-if="hasNextPage"
     >
@@ -101,7 +100,7 @@ onMounted(fetchEvents);
 </template>
 
 <style scoped>
-.event {
+.passenger {
   display: flex;
   flex-direction: column;
   align-items: center;

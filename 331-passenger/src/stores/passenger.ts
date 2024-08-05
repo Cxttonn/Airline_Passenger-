@@ -1,12 +1,12 @@
-import type { EventState, Event } from "@/types";
+import type { PassengerState, Passenger } from "@/types";
 import { defineStore } from "pinia";
-export const useEventStore = defineStore('event', {
-    state: (): EventState => ({
+export const usePassengerStore = defineStore('event', {
+    state: (): PassengerState => ({
         event: null
     }),
     actions: {
-        setEvent(event: Event): void{
-            this.event = event
+        setPassenger(passenger: Passenger): void{
+            this.passenger = passenger
         }
     }
 })

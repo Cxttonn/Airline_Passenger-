@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { type Event } from '@/types';
+import { type Passenger } from '@/types';
 
 //ข้อ 1.6 lab04
 import { useRouter } from 'vue-router';
@@ -9,13 +9,13 @@ import { useMessageStore } from '@/stores/message';
 
 
 const props = defineProps <{
-    event: Event
+    passenger: Passenger
     id: String
 }>()
 
 
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
-const {event} = toRefs(props)
+const {passenger} = toRefs(props)
 
 //ข้อ 1.6 lab04: Initialize router 
 const router = useRouter();
@@ -26,7 +26,7 @@ const edit = () => {
    setTimeout(() =>{
     store.resetMessage()
    },3000)
-   router.push({name: 'event-detail-view', params: {id: props.event.id}})
+   router.push({name: 'passenger-detail-view', params: {id: props.passenger.id}})
 }
 </script>
 <template>

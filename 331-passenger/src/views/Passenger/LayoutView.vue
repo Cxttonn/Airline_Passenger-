@@ -3,7 +3,8 @@
 // import { type Event } from '@/types';
 // import EventService from '@/services/EventService'
 // import { useRouter } from 'vue-router';
-import { useEventStore } from '@/stores/event';
+// import { usePassengerStore } from '@/stores/passenger';
+import { usePassengerStore } from '@/stores/passenger'
 import { storeToRefs } from 'pinia';
 
 // const event = ref<Event | null>(null)
@@ -14,8 +15,8 @@ import { storeToRefs } from 'pinia';
 //     }
 // })
 // const router = useRouter()
-const store = useEventStore()
-const {event} = storeToRefs(store)
+const store = usePassengerStore()
+const {passenger} = storeToRefs(store)
 
 // onMounted(() => {
 //     EventService.getEvent(parseInt(props.id))
@@ -36,13 +37,13 @@ const {event} = storeToRefs(store)
 
 </script>
 <template>
-    <div v-if="event">
-        <h1>{{ event.title }}</h1>
+    <div v-if="passenger">
+        <h1>{{ passenger.title }}</h1>
         <nav>
-            <RouterLink :to="{name: 'event-detail-view'}">Details</RouterLink> |
-            <RouterLink :to="{name: 'event-register-view'}">Register</RouterLink> |
-            <RouterLink :to="{name: 'event-edit-view'}">Edit</RouterLink>
+            <RouterLink :to="{name: 'passenger-detail-view'}">Details</RouterLink> |
+            <RouterLink :to="{name: 'passenger-register-view'}">Register</RouterLink> |
+            <RouterLink :to="{name: 'passenger-edit-view'}">Edit</RouterLink>
         </nav>
-        <RouterView :event="event" />
+        <RouterView :passenger="passenger" />
     </div>
 </template>

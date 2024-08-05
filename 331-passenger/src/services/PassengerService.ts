@@ -10,10 +10,10 @@ const apiClient = axios.create({
 });
 
 export default {
-  getEvents(perPage: number, page: number) {
-    return apiClient.get(`/events?_limit=${perPage}&_page=${page}`);
+  getPassengers(perPage: number, page: number) {
+    return apiClient.get(`/passengers?_limit=${perPage}&_page=${page}`);
   },
-  getEvent(id: number) {
-    return apiClient.get(`/events/${id}`);
+  getPassenger(id: number) {
+    return apiClient.get(`/passengers/${id}`);
   },
 };
