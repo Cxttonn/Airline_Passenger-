@@ -19,7 +19,6 @@ const page = ref(parseInt(route.query.page as string) || 1);
 
 const hasNextPage = computed(() => {
   const totalPages = Math.ceil(totalPassengers.value / pageSize.value);
-//   const totalPages = Math.ceil(totalPassengers.value / 3);
   return page.value < totalPages;
 });
 
@@ -34,7 +33,7 @@ const props = defineProps({
     watchEffect(() => {
       passengers.value = null
       nProgress.start()
-      PassengerService.getPassengers(pageSize, page.value)
+      PassengerService.getPassengers(3, page.value)
         .then((response) => {
           passengers.value = response.data
           totalPassengers.value = response.headers['x-total-count']
@@ -57,7 +56,7 @@ const fetchPassengers = async () => {
   } catch (error) {
     console.error('Failed to fetch events:', error);
   }
-};
+}
 
 
 watch(
@@ -76,7 +75,7 @@ onMounted(fetchPassengers);
 <template>
   <h1>Passengers</h1>
   <div class="passenger">
-    <PassengerCard v-for="passenger in passengers" :key="passenger.id" :passenger="passenger" />
+    <PassengerCard v-for="passenger in passengers" :key="passenger._id" :passenger="passenger" />
   </div>
   <div class="pagination">
     <RouterLink

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://my-json-server.typicode.com/cxttonn/mock-server',
+  baseURL: 'https://api.instantwebtools.net/v1',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -11,9 +11,11 @@ const apiClient = axios.create({
 
 export default {
   getPassengers(perPage: number, page: number) {
-    return apiClient.get(`/passengers?_limit=${perPage}&_page=${page}`);
+    return apiClient.get(`/passenger?_limit=${perPage}&_page=${page}`);
   },
-  getPassenger(id: number) {
-    return apiClient.get(`/passengers/${id}`);
+  getPassenger(id: string) {
+    return apiClient.get(`/passenger/${id}`);
   },
 };
+
+

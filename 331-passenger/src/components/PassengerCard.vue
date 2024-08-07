@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
 import { type Passenger } from '@/types';
 defineProps<{
   passenger: Passenger
@@ -6,11 +7,11 @@ defineProps<{
 </script>
 
 <template>
-      <RouterLink class="passenger-link" :to="{name: 'passenger-detail-view', params: {id: passenger.id}}">
+      <RouterLink class="passenger-link" :to="{name: 'passenger-detail-view', params: {id: passenger._id}}">
     <div class="passenger-card">
       <h2>{{ passenger.name }}</h2>
-      <span>@{{ passenger.departure_time }} on {{ passenger.departure_date }}</span>
-      <p>{{ passenger.destination }}</p>
+      <!-- <span>@{{ passenger.airline ? passenger.airline[0].country :'No Airline' }}</span> -->
+      <span>@{{ passenger.airline.length ? passenger.airline[0].country : 'No Airline' }}</span>
     </div>
 </RouterLink>
 </template>

@@ -10,7 +10,7 @@ import { useMessageStore } from '@/stores/message';
 
 const props = defineProps <{
     passenger: Passenger
-    id: String
+    _id: String
 }>()
 
 
@@ -26,7 +26,7 @@ const edit = () => {
    setTimeout(() =>{
     store.resetMessage()
    },3000)
-   router.push({name: 'passenger-detail-view', params: {id: props.passenger.id}})
+   router.push({name: 'passenger-detail-view', params: {id: props.passenger._id}})
 }
 </script>
 <template>

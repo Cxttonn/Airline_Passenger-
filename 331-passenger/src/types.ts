@@ -1,11 +1,17 @@
 export interface Passenger{
-    id: number
+    _id: string
     name: string
-    age: number
-    passport_number: string
-    flight: string
-    seat_number: string
-    destination: string
-    departure_date: string
-    departure_time: string
+    trips: number
+    airline: Airline[];
+}
+
+export interface Airline{
+    _id: string;
+    name: string;
+    title: string;
+    country: string;
+    logo: string;
+    slogan: string;
+    head_quaters: string;
+    website: string;
 }

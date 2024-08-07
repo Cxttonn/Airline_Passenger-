@@ -16,7 +16,7 @@ const register = () => {
     setTimeout(() => {
         store.resetMessage()
     }, 5000)
-    router.push({name: 'passenger-detail-view', params: {id: props.passenger.id}})
+    router.push({name: 'passenger-detail-view', params: {id: props.passenger._id}})
 }
 </script>
 <template>
