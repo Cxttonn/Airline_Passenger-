@@ -10,6 +10,7 @@ import NetworkErrorView from '@/views/NetworkErrorView.vue';
 import nProgress from 'nprogress';
 import PassengerService from '@/services/PassengerService';
 import { usePassengerStore } from '@/stores/passenger';
+import AirlineDetailView from '@/views/AirlineDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,7 +49,15 @@ const router = createRouter({
           path: '',
           name: 'passenger-detail-view',
           component: PassengerDetailView,
-          props: true
+          props: true,
+          children: [
+            {
+            path: 'airline/:airlineId',
+            name: 'airline-detail-view',
+            component: AirlineDetailView,
+            props: true
+            }
+          ]
         },
         {
           path: 'register',

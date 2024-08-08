@@ -10,7 +10,7 @@ import { useMessageStore } from '@/stores/message';
 
 const props = defineProps <{
     passenger: Passenger
-    _id: String
+    id: String
 }>()
 
 

@@ -13,7 +13,7 @@ export default {
   getPassengers(perPage: number, page: number) {
     return apiClient.get(`/passenger?_limit=${perPage}&_page=${page}`);
   },
-  getPassenger(id: string) {
+  getPassenger(id: number) {
     return apiClient.get(`/passenger/${id}`);
   },
 };

@@ -10,7 +10,6 @@ defineProps<{
       <RouterLink class="passenger-link" :to="{name: 'passenger-detail-view', params: {id: passenger._id}}">
     <div class="passenger-card">
       <h2>{{ passenger.name }}</h2>
-      <!-- <span>@{{ passenger.airline ? passenger.airline[0].country :'No Airline' }}</span> -->
       <span>@{{ passenger.airline.length ? passenger.airline[0].country : 'No Airline' }}</span>
     </div>
 </RouterLink>
