@@ -2,10 +2,7 @@
 import { defineProps } from 'vue';
 import { type Passenger } from '@/types';
 import { useRouter } from 'vue-router';
-import { mergeProps } from 'vue';
-// defineProps<{
-//   passenger: Passenger
-// }> ()
+
 const props = defineProps<{passenger: Passenger}>();
 const router = useRouter();
 const goToDetails = () => {

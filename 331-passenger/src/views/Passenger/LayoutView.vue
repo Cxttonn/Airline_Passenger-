@@ -8,7 +8,7 @@ const {passenger} = storeToRefs(store)
 </script>
 <template>
     <div v-if="passenger">
-        <h1>{{ passenger?.name }}</h1>
+        <h1>{{ passenger.name }}</h1>
         <nav>
             <RouterLink :to="{name: 'passenger-detail-view'}">Details</RouterLink> |
             <RouterLink :to="{name: 'passenger-register-view'}">Register</RouterLink> |

@@ -93,7 +93,7 @@ const router = createRouter({
       path: '/network-error',
       name: 'network-error-view',
       component: NetworkErrorView
-    }
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

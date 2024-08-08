@@ -54,7 +54,6 @@ onMounted(fetchPassengers);
       <div
         v-for="passenger in passengers"
         :key="passenger._id"
-        class="passenger-item"
         @click="viewPassengerDetails(passenger._id)"
       >
         <PassengerCard :passenger="passenger" />

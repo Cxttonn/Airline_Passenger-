@@ -1,14 +1,4 @@
-<template>
-    <div v-if="airline">
-      <h1>{{ airline.name }}</h1>
-      <p>Country: {{ airline.country }}</p>
-      <p>Slogan: {{ airline.slogan }}</p>
-      <p>Headquarters: {{ airline.head_quaters }}</p>
-      <img :src="airline.logo" alt="Logo" />
-    </div>
-  </template>
-  
-  <script setup lang="ts">
+<script setup lang="ts">
   import { ref, onMounted, defineProps } from 'vue';
   import PassengerService from '@/services/PassengerService';
   import { type Airline } from '@/types';
@@ -28,3 +18,12 @@
   onMounted(fetchAirline);
   </script>
   
+  <template>
+    <div v-if="airline">
+      <h1>{{ airline.name }}</h1>
+      <p>Country: {{ airline.country }}</p>
+      <p>Slogan: {{ airline.slogan }}</p>
+      <p>Headquarters: {{ airline.head_quaters }}</p>
+      <img :src="airline.logo" alt="Logo" />
+    </div>
+  </template>
