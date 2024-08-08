@@ -6,7 +6,7 @@ export interface Passenger{
 }
 
 export interface Airline{
-    _id: string;
+    _id: number;
     name: string;
     title: string;
     country: string;

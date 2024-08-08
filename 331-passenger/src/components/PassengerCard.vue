@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { type Passenger } from '@/types';
-defineProps<{
-  passenger: Passenger
-}> ()
+import { useRouter } from 'vue-router';
+import { mergeProps } from 'vue';
+// defineProps<{
+//   passenger: Passenger
+// }> ()
+const props = defineProps<{passenger: Passenger}>();
+const router = useRouter();
+const goToDetails = () => {
+  router.push({name: 'passenger-detail-view', params: {id: props.passenger._id}})
+}
 </script>
 
 <template>
       <RouterLink class="passenger-link" :to="{name: 'passenger-detail-view', params: {id: passenger._id}}">
-    <div class="passenger-card">
+    <div class="passenger-card" @click="goToDetails">
       <h2>{{ passenger.name }}</h2>
       <span>@{{ passenger.airline.length ? passenger.airline[0].country : 'No Airline' }}</span>
     </div>
